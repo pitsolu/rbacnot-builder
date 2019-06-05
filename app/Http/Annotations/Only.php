@@ -9,7 +9,7 @@ use ReflectionMethod;
 /**
  * @Annotation
  */
-class Permission extends Annotation {
+class Only extends Annotation {
 
   /**
    * {@inheritdoc}

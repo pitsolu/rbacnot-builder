@@ -1,14 +1,14 @@
 Laravel RBAC and Annotations
 ===
 
-This is a sample project. It's aim is to create a role based access control on every method through annotations
+This is a sample project. It's aim is to demonstrate creation of role based access control as annotations on methods
 
-The aim is to make authorization simpler and more evident. See example below:
+It makes authorization simpler and more evident. See example below:
 
 ```php
 /**
      * @Post("/add/user")
-     * @Permission("permission:add_user")
+     * @Only("permission:add_user")
      *
      * Display a listing of the resource.
      *
@@ -22,4 +22,4 @@ The aim is to make authorization simpler and more evident. See example below:
     }
 ```
 
-Used packages [laravelcollective/annotations](https://github.com/LaravelCollective/annotations) and [zizaco/entrust](https://github.com/Zizaco/entrust).
+Packages used are [laravelcollective/annotations](https://github.com/LaravelCollective/annotations) and [zizaco/entrust](https://github.com/Zizaco/entrust).

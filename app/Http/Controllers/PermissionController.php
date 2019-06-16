@@ -3,45 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
+use App\Permission;
 use Validator;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
-     * @Get("/roles")
+     * @Get("/permissions")
     */
     public function all(Request $request){
 
         $perpage = $request->input("perpage");
         $page = $request->input("page");
 
-        $roles = Role::paginate($perpage, '*', 'page', $page);
+        $perm = Permission::paginate($perpage, '*', 'page', $page);
 
         $response = [
 
             'success' => true,
-            'data' => $roles->toArray(),
-            "message"=>"Roles successfully retrived."
+            'data' => $perm->toArray(),
+            "message"=>"Permissions successfully retrived."
         ];
 
         return response()->json($response, 200);
     }
 
     /**
-     * @Get("/role/{id}", where={"id": "[0-9]+"})
+     * @Get("/permission/{id}", where={"id": "[0-9]+"})
     */
     public function get($id){
 
-        $role = Role::find($id);
+        $perm = Permission::find($id);
 
-        if(is_null($role)){
+        if(is_null($perm)){
 
             $response = [
 
                 "success"=>false,
                 "data"=>"",
-                "message"=>"Role not found!"
+                "message"=>"Permission not found!"
             ];
 
             return response()->json($response, 404);
@@ -51,17 +51,17 @@ class RoleController extends Controller
             $response = [
 
                 "success"=>true,
-                "data"=>$role->toArray(),
-                "message"=>"Role retrived successfully"
+                "data"=>$perm->toArray(),
+                "message"=>"Permission retrived successfully"
             ];
 
             return response()->json($response, 200);
-        }
+       }
     }
 
     /**
-     * @Get("/role/add")
-     * @Only("permission:role_add")
+     * @Get("/permission/add")
+     * @Only("permission:add_permission")
      *
      * Display a listing of the resource.
      *
@@ -91,13 +91,13 @@ class RoleController extends Controller
         }
         else{
 
-            $role = Role::create($input);
+            $perm = Permission::create($input);
 
             $response = [
 
                 "success"=>true,
-                "data"=>$role->toArray(),
-                "message"=>"Role successfuly saved"
+                "data"=>$perm->toArray(),
+                "message"=>"Permission successfuly saved"
             ];
 
             return response()->json($response, 200);
@@ -105,11 +105,11 @@ class RoleController extends Controller
     }
 
     /**
-     * @Get("/role/{id}/update")
+     * @Get("/permission/{id}/update")
     */
     public function update(Request $request, $id){
 
-        $role = Role::findOrFail($id);
+        $perm = Permission::findOrFail($id);
 
         $input = $request->all();
 
@@ -132,16 +132,16 @@ class RoleController extends Controller
         }
         else{
 
-            $role->name = $input["name"];
-            $role->display_name = $input["display_name"];
-            $role->description = $input["description"];
-            $role->save();
+            $perm->name = $input["name"];
+            $perm->display_name = $input["display_name"];
+            $perm->description = $input["description"];
+            $perm->save();
 
             $response = array(
 
                 "success"=>true,
                 "message"=>"Role successfully saved",
-                "data"=>$role->toArray()
+                "data"=>$perm->toArray()
             );
 
             return response()->json($response, 404);

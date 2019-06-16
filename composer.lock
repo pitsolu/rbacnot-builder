@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e1d0fed5fa680c3cc412e759d052c88",
+    "content-hash": "10b7637dc3c1680ba405bdb43bc67713",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1520,6 +1520,46 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "strukt/fs",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pitsolu/strukt-fs.git",
+                "reference": "c55b1e41851582274df5e885df3a782e8c1647a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pitsolu/strukt-fs/zipball/c55b1e41851582274df5e885df3a782e8c1647a9",
+                "reference": "c55b1e41851582274df5e885df3a782e8c1647a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.2"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "5.6.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Strukt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moderator",
+                    "email": "pitsolu@gmail.com"
+                }
+            ],
+            "description": "Strukt Filesystem",
+            "time": "2019-02-23T21:49:11+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4838,7 +4878,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "strukt/fs": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

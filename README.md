@@ -1,9 +1,9 @@
-Laravel RBAC and Annotations
+Laravel RbacNot Builder
 ===
 
-This is a sample project. It's aim is to demonstrate creation of role based access control as annotations on methods
+This is a builder project for [pitsolu/rbacnot](https://github.com/pitsolu/rbacnot).
 
-It makes authorization simpler and more evident. See example below:
+The aim of `pitsolu/rbacnot` is to do something like this with role based access:
 
 ```php
 /**

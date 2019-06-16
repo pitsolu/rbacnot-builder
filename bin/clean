@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm app/Http/Kernel.php~
+rm app/Http/Kernel.php~*
+rm config/app.php~
+rm config/app.php~*
+rm database/migrations/*entrust*.php~
+rm database/migrations/*entrust*.php~*

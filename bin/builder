@@ -1,0 +1,136 @@
+#!/bin/bash
+
+mkdir -p ../rbacnot/config
+mkdir -p ../rbacnot/src/app/Http/Controllers
+mkdir -p ../rbacnot/src/app/Http/Annotations
+mkdir -p ../rbacnot/src/app/Providers
+mkdir -p ../rbacnot/src/database/seeds
+mkdir -p ../rbacnot/src/database/migrations
+mkdir -p ../rbacnot/src/RbacNot/Commands
+cp config/app.php ../rbacnot/config/
+cp database/migrations/*entrust*.php ../rbacnot/src/database/migrations/sample_entrust_tables.php
+cp app/Http/Kernel.php ../rbacnot/src/app/Http/
+cp app/Providers/AnnotationsServiceProvider.php ../rbacnot/src/app/Providers/
+cp app/Providers/RbacNotServiceProvider.php ../rbacnot/src/RbacNot/
+cp app/*.php ../rbacnot/src/app/
+cp -R app/Http/Controllers/*.php ../rbacnot/src/app/Http/Controllers/
+rm ../rbacnot/src/app/Http/Controllers/Controller.php
+cp -R app/Http/Annotations/* ../rbacnot/src/app/Http/Annotations/
+cp app/Http/Annotations/*.php ../rbacnot/src/app/Http/Annotations/
+cp database/seeds/*TableSeeder.php ../rbacnot/src/database/seeds/
+cp app/Console/Commands/* ../rbacnot/src/RbacNot/Commands/
+sed -i 's/App\\Console\\Commands/Pitsolu\\RbacNot\\Commands/g' ../rbacnot/src/RbacNot/Commands/*
+
+export GIT_DIR=../rbacnot/.git
+git init
+git remote add origin git@github.com:pitsolu/rbacnot.git
+git config user.name pitsolu
+git config user.email pitsolu@gmail.com
+
+echo "composer.lock
+vendor
+test.php
+php_errors.log
+config/
+src/app/Http/Kernel.php
+src/app/Http/Kernel.php~
+src/app/Http/Kernel.php~*
+src/database/migrations
+" > ../rbacnot/.gitignore
+
+echo "{
+    \"name\": \"pitsolu/rbacnot\",
+    \"description\": \"Routing Annotations Permissions\",
+    \"type\": \"library\",
+    \"license\": \"MIT\",
+    \"authors\": [
+        {
+            \"name\": \"Pitsolu\",
+            \"email\": \"pitsolu@gmail.com\"
+        }
+    ],
+    \"minimum-stability\": \"dev\",
+    \"require\": {
+        \"zizaco/entrust\": \"1.9.1\",
+        \"laravelcollective/annotations\": \"5.8.*\",
+        \"strukt/fs\": \"dev-master\",
+        \"pitsolu/rbacnot\": \"dev-master\"
+    },
+    \"autoload\": {
+        \"psr-4\": {
+            \"Pitsolu\\\RbacNot\\\\\": \"src/RbacNot\"
+        }
+    },
+    \"extra\":{
+        \"laravel\":{
+            \"providers\":[
+                \"Pitsolu\\\RbacNot\\\RbacNotServiceProvider\"
+            ]
+        }
+    }
+}" > ../rbacnot/composer.json
+
+echo "Router Annotations Permissions
+===
+\`rbacnot\` is an package that combines the benefits of annotations and role based access control(rbac) for Laravel applications. 
+
+It also allows you to route your applications via annotations.
+
+### Usage
+
+Installing \`pitsolu/rbacnot\`:
+
+\`\`\`sh
+composer require pitsolu/rbacnot
+\`\`\`
+
+Select \`Pitsolu\RbacNot\RbacNotServiceProvider\` by running. WARN: This command will overwrite your \`app/User.php\`
+
+\`\`\`sh
+php artisan vendor:publish --force
+\`\`\`
+Then run the above command again and select \`Zizaco\Entrust\EntrustServiceProvider\` without the \`--force\`switch.
+
+\`\`\`sh
+php artisan vendor:publish
+\`\`\`
+
+Install \`zizaco/entrust\` migrations and sanitize them:
+
+\`\`\`sh
+php artisan entrust:migration
+php artisan entrust:clean
+\`\`\`
+After that you'll need to load entrust migrations to db:
+
+\`\`\`sh
+php artisan migrate
+\`\`\`
+
+You'll also need to load data into the db (may need to run cmds more than once, they may fail):
+
+\`\`\`sh
+composer dump-autoload
+php arisan db:seed --class=PermissionsTableSeeder
+php arisan db:seed --class=RoleTableSeeder
+php arisan db:seed --class=UserTableSeeder
+\`\`\`
+
+We are almost there buddy, hang on. Next, set up \`pitsolu/rbacnot\` which will edit your \`config/app.php\` and \`app/Http/Kernel.php\` files and backup the originals.
+
+\`\`\`sh
+php artisan rbacnot:setup
+\`\`\`
+
+Then finally scan routes:
+
+\`\`\`sh
+php artisan route:scan
+\`\`\`
+
+### Credits
+
+Packages used:
+
+- [Entrust](https://github.com/Zizaco/entrust)
+- [Laravel Collections Annotations](https://github.com/LaravelCollective/annotations)" > ../rbacnot/README.md

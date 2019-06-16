@@ -136,9 +136,6 @@ return [
 
     'providers' => [
 
-        App\Providers\AnnotationsServiceProvider::class, //
-        Zizaco\Entrust\EntrustServiceProvider::class, //
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -192,9 +189,6 @@ return [
     */
 
     'aliases' => [
-
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class, //
-
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

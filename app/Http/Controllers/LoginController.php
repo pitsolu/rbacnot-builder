@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
  
@@ -21,31 +20,8 @@ class LoginController extends Controller
     |
     */
 
-    // use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-        // $this->middleware('guest')->except('logout');
-        // $this->middleware('auth')->except('logout');
-
-    }
-
     /**
      * @Get("/login", as="login")
-     * 
      *
      * Login api
      *
@@ -55,46 +31,30 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-         // $this->middleware('auth');
 
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             
             $user = Auth::user();
 
-
-            // dd($user->toArray());
-
-            // \Session::put("user", $user->toArray());
-            // \Session::save();
-
-            // dd(session());
-
-            // Auth::login($user, true); //remember the user.
-
-            // $success['token'] = $user->createToken('MyApp')->accessToken;
-
             $request->session()->regenerate();
-            // session()->save();
 
-            // \Session::start();
-            // \Session::invalidate();
-            // dd(\Session::all());
+            $response = array(
 
-            // $request->setLaravelSession(session());
-
-
-            // dd(\Session::all());
-
-            $success = array(
-
-                "message"=>"You have succeeded"
+                "success" => true,
+                "message"=>"Logged in successfully."
             );
 
-            return response()->json(['success' => $success], 200);
+            return response()->json($response, 200);
         } 
         else {
+
+            $response = array(
+
+                "success" => false,
+                "message"=>"Failed to login!"
+            );
             
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return response()->json($response, 401);
         }
     }
 
@@ -103,12 +63,6 @@ class LoginController extends Controller
     *
     */
     public function is_authd(Request $request){
-
-        // dd(\Session::all());
-
-        // dd(session());
-
-        // dd(Auth::check());   
 
         if(Auth::check()){
 

@@ -80,36 +80,36 @@ It also allows you to route your applications via annotations.
 
 Installing \`pitsolu/rbacnot\`:
 
-\`\`\`php
+\`\`\`sh
 composer require pitsolu/rbacnot
 \`\`\`
 
 Select \`Pitsolu\RbacNot\RbacNotServiceProvider\` by running. WARN: This command will overwrite your \`app/User.php\`
 
-\`\`\`php
+\`\`\`sh
 php artisan vendor:publish --force
 \`\`\`
 Then run the above command again and select \`Zizaco\Entrust\EntrustServiceProvider\` without the \`--force\`switch.
 
-\`\`\`php
+\`\`\`sh
 php artisan vendor:publish
 \`\`\`
 
 Install \`zizaco/entrust\` migrations and sanitize them:
 
-\`\`\`php
+\`\`\`sh
 php artisan entrust:migration
 php artisan entrust:clean
 \`\`\`
 After that you'll need to load entrust migrations to db:
 
-\`\`\`php
+\`\`\`sh
 php artisan migrate
 \`\`\`
 
 You'll also need to load data into the db (may need to run cmds more than once, they may fail):
 
-\`\`\`php
+\`\`\`sh
 composer dump-autoload
 php arisan db:seed --class=PermissionsTableSeeder
 php arisan db:seed --class=RoleTableSeeder
@@ -118,13 +118,13 @@ php arisan db:seed --class=UserTableSeeder
 
 We are almost there buddy, hang on. Next, set up \`pitsolu/rbacnot\` which will edit your \`config/app.php\` and \`app/Http/Kernel.php\` files and backup the originals.
 
-\`\`\`php
+\`\`\`sh
 php artisan rbacnot:setup
 \`\`\`
 
 Then finally scan routes:
 
-\`\`\`php
+\`\`\`sh
 php artisan route:scan
 \`\`\`
 
